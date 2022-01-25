@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #cube{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            margin: 0 auto;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <button id="right">按下以向右移动方块</button>
+    <br><br>
+    <button id="left">按下以向左移动方块</button>
+    <br><br>
+    <div id="cube"></div>
+</body>
+<script>
+    var button=document.getElementById("right");
+    var button2=document.getElementById("left");
+    var cube=document.getElementById("cube");
+    var timer,oldValue,timer2;
+    button.onclick=function(){
+        clearInterval(timer);
+        clearInterval(timer2);
+        timer=setInterval(function(){
+            oldValue=cube.clientWidth;
+            cube.style.width=parseInt(oldValue)+10+"px";
+            console.log(cube.style.width);
+            if(parseInt(cube.style.width)>950)
+                clearInterval(timer);
+        },30)
+    }
+    button2.onclick=function(){
+        clearInterval(timer2);
+        clearInterval(timer);
+        timer2=setInterval(function(){
+            oldValue=cube.offsetLeft;
+            cube.style.left=oldValue-10+"px";
+            console.log(parseInt(cube.style.left));
+            if(parseInt(cube.style.left)<8)
+                clearInterval(timer2);
+        },30)
+    }
+</script>
+</html>
